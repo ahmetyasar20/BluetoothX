@@ -1,6 +1,8 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from Tkinter import *
+import Fonksiyonlar
         
 ##############################################################
 #Pencerenin nasıl görüneceğini belirliyoruz.                 #
@@ -12,13 +14,20 @@ pencere = Tk()
 pencere.title("Bilgisayar-Bluetooth Haberleşme Projesi")
 pencere.resizable(width=FALSE, height=FALSE)
 
-AcKapaTusu = Checkbutton(text="Bluetooth Aç/Kapat")
-AcKapaTusu.pack(pady=10, padx=10)
+bilgiYazisi = Label(text = "")
+bilgiYazisi.pack()
 
 cihazListesi = Listbox()
 cihazListesi.pack(side=LEFT, pady=10, padx=10)
 
-cihazBul = Button(text="Etraftaki Cihazları Bul", bg="white")
+def cihazEkle():
+    cihazAdlari = []
+    cihazAdlari = Fonksiyonlar.cihazlariBul()
+    if cihazAdlari != "":
+        cihazListesi.insert(0, cihazAdlari)
+        bilgiYazisi["text"] = "Cihazlar bulundu!";
+
+cihazBul = Button(text="Etraftaki Cihazları Bul", bg="white", comman=cihazEkle)
 cihazBul.config(width=20, height=1)
 cihazBul.pack(pady=10, padx=10)
 
